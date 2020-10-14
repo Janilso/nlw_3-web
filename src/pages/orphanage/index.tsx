@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { FiClock, FiInfo } from "react-icons/fi";
 import { Map, Marker, TileLayer } from "react-leaflet";
@@ -6,124 +6,114 @@ import "./styles.scss";
 import Sidebar from "../../components/sidebar";
 import CarroselImages from "../../components/carousel_images";
 import happyMapIcon from "../../utils/mapIcon";
+import { getOrphanage, iOrphanage } from "../../services/orphanage_service";
+import { useParams } from "react-router-dom";
+import { URL_MAPBOX, URL_GOOGLE_MAPS_ROUTER } from "../../services/api_routers";
+import CardInfo from "../../components/card-info";
+
+interface OrphanageParams {
+  id: string;
+}
 
 const Orphanage = () => {
+  const [orphanage, setOrphanage] = useState<iOrphanage>();
+  const params = useParams<OrphanageParams>();
+
+  /*
+   * Functions
+   */
+  useEffect(() => {
+    getOrphanage(Number(params.id)).then((orphanage) =>
+      setOrphanage(orphanage)
+    );
+  }, [params.id]);
+
+  const images =
+    orphanage?.images.map((image) => {
+      return {
+        url: image.url,
+        id: image.id,
+      };
+    }) || [];
+
+  /*
+   * Renders
+   */
+
+  const renderMap = () => {
+    return (
+      <div className="map-container">
+        <Map
+          center={[
+            orphanage?.latitude ?? -27.2092052,
+            orphanage?.longitude ?? -49.6401092,
+          ]}
+          zoom={16}
+          style={{ width: "100%", height: 280 }}
+          dragging={false}
+          touchZoom={false}
+          zoomControl={false}
+          scrollWheelZoom={false}
+          doubleClickZoom={false}
+        >
+          <TileLayer url={URL_MAPBOX} />
+          <Marker
+            interactive={false}
+            icon={happyMapIcon}
+            position={[
+              orphanage?.latitude ?? -27.2092052,
+              orphanage?.longitude ?? -49.6401092,
+            ]}
+          />
+        </Map>
+
+        <footer>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href={`${URL_GOOGLE_MAPS_ROUTER}&destination=${orphanage?.latitude},${orphanage?.longitude}`}
+          >
+            <p className="text-map">Ver rotas no Google Maps</p>
+          </a>
+        </footer>
+      </div>
+    );
+  };
+
   return (
     <div className="orphanage">
       <Sidebar />
 
       <main>
         <div className="orphanage-details">
-          <CarroselImages
-            images={[
-              {
-                url:
-                  "https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg",
-                alt: "Lar das meninas",
-                id: 0,
-              },
-              {
-                url:
-                  "https://www.lupadigital.info/wp-content/uploads/2018/05/imagens-gratis.jpg",
-                alt: "Lar das meninas",
-                id: 1,
-              },
-              {
-                url:
-                  "https://i.pinimg.com/originals/e4/34/2a/e4342a4e0e968344b75cf50cf1936c09.jpg",
-                alt: "Lar das meninas",
-                id: 2,
-              },
-              {
-                url:
-                  "https://i.pinimg.com/originals/07/12/9a/07129ae291762b21e20b42552803704b.jpg",
-                alt: "Lar das meninas",
-                id: 3,
-              },
-              {
-                url:
-                  "https://www.sonetur.com.br/wp-content/uploads/2018/03/sonetur-fotos-2017-63.jpg",
-                alt: "Lar das meninas",
-                id: 4,
-              },
-              {
-                url:
-                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
-                alt: "Lar das meninas",
-                id: 5,
-              },
-              {
-                url:
-                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
-                alt: "Lar das meninas",
-                id: 6,
-              },
-              {
-                url:
-                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
-                alt: "Lar das meninas",
-                id: 7,
-              },
-              {
-                url:
-                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
-                alt: "Lar das meninas",
-                id: 8,
-              },
-            ]}
-          />
+          <CarroselImages images={images} />
 
           <div className="orphanage-details-content">
-            <h1>Lar das meninas</h1>
-            <p>
-              Presta assistência a crianças de 06 a 15 anos que se encontre em
-              situação de risco e/ou vulnerabilidade social.
-            </p>
+            <h1>{orphanage?.name}</h1>
+            <p>{orphanage?.about}</p>
 
-            <div className="map-container">
-              <Map
-                center={[-27.2092052, -49.6401092]}
-                zoom={16}
-                style={{ width: "100%", height: 280 }}
-                dragging={false}
-                touchZoom={false}
-                zoomControl={false}
-                scrollWheelZoom={false}
-                doubleClickZoom={false}
-              >
-                <TileLayer
-                  url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
-                />
-                <Marker
-                  interactive={false}
-                  icon={happyMapIcon}
-                  position={[-27.2092052, -49.6401092]}
-                />
-              </Map>
-
-              <footer>
-                <a href="?">Ver rotas no Google Maps</a>
-              </footer>
-            </div>
+            {renderMap()}
 
             <hr />
 
             <h2>Instruções para visita</h2>
-            <p>
-              Venha como se sentir mais à vontade e traga muito amor para dar.
-            </p>
+            <p>{orphanage?.instructions}</p>
 
             <div className="open-details">
-              <div className="hour">
-                <FiClock size={32} color="#15B6D6" />
-                Segunda à Sexta <br />
-                8h às 18h
-              </div>
-              <div className="open-on-weekends">
-                <FiInfo size={32} color="#39CC83" />
-                Atendemos <br />
-                fim de semana
-              </div>
+              <CardInfo
+                icon={<FiClock />}
+                title={["Segunda à Sexta", orphanage?.opening_hours ?? ""]}
+              />
+              <CardInfo
+                typeCard={orphanage?.open_on_weekends ? "green" : "red"}
+                icon={<FiInfo />}
+                title={[
+                  `${
+                    orphanage?.open_on_weekends ? "Atendemos" : "Não atendemos"
+                  }`,
+                  "fim de semana",
+                ]}
+              />
             </div>
 
             <button type="button" className="contact-button">

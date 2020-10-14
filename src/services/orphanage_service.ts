@@ -26,4 +26,13 @@ const getAllOrphanages = () => {
   });
 };
 
-export { getAllOrphanages };
+const getOrphanage = (id: number) => {
+  return new Promise<iOrphanage>((resolve, reject) => {
+    api
+      .get(`${URL_ORPHANAGES}/${id}`)
+      .then(({ data }) => resolve(data))
+      .catch((err) => reject(err));
+  });
+};
+
+export { getAllOrphanages, getOrphanage };
