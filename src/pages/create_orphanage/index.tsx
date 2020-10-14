@@ -1,12 +1,14 @@
 import React from "react";
 import { Map, Marker, TileLayer } from "react-leaflet";
 import L from "leaflet";
-import { useHistory } from "react-router-dom";
 
-import { FiArrowLeft, FiPlus } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
 import { markerImg } from "../../assets";
 import "./styles.scss";
 import Button from "../../components/button";
+import Sidebar from "../../components/sidebar";
+import Title from "../../components/title";
+import Input from "../../components/input";
 
 const happyMapIcon = L.icon({
   iconUrl: markerImg,
@@ -16,25 +18,13 @@ const happyMapIcon = L.icon({
 });
 
 const CreateOrphanage = () => {
-  const { goBack } = useHistory();
-
   return (
     <div id="page-create-orphanage" className="create-orphanage">
-      <aside className="bg-gradient">
-        <img src={markerImg} alt="Happy" />
-        <footer>
-          <Button
-            typeButton="primary"
-            icon={<FiArrowLeft />}
-            onClick={goBack}
-          />
-        </footer>
-      </aside>
-
+      <Sidebar />
       <main>
         <form className="create-orphanage-form">
           <fieldset>
-            <legend className="title">Dados</legend>
+            <Title title="Dados" />
 
             <Map
               center={[-27.2092052, -49.6401092]}
@@ -52,52 +42,35 @@ const CreateOrphanage = () => {
               />
             </Map>
 
-            <div className="input-block">
-              <label htmlFor="name">Nome</label>
-              <input id="name" />
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="about">
-                Sobre <span>Máximo de 300 caracteres</span>
-              </label>
-              <textarea id="name" maxLength={300} />
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="images">Fotos</label>
-
+            <Input id="name" label="Nome" />
+            <Input
+              id="about"
+              label="Sobre"
+              sublabel="Máximo de 300 caracteres"
+              typeTextarea
+            />
+            <Input id="images" label="Fotos">
               <div className="uploaded-image" />
 
               <button className="new-image">
                 <FiPlus size={24} color="#15b6d6" />
               </button>
-            </div>
+            </Input>
           </fieldset>
 
           <fieldset>
-            <legend className="title">Visitação</legend>
+            <Title title="Visitação" />
+            <Input id="instructions" label="Instruções" />
+            <Input id="opening_hours" label="Nome" />
 
-            <div className="input-block">
-              <label htmlFor="instructions">Instruções</label>
-              <textarea id="instructions" />
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="opening_hours">Nome</label>
-              <input id="opening_hours" />
-            </div>
-
-            <div className="input-block">
-              <label htmlFor="open_on_weekends">Atende fim de semana</label>
-
+            <Input id="open_on_weekends" label="Atende fim de semana">
               <div className="button-select">
                 <button type="button" className="active">
                   Sim
                 </button>
                 <button type="button">Não</button>
               </div>
-            </div>
+            </Input>
           </fieldset>
 
           <Button type="submit" title="Confirmar" typeButton="green" />
@@ -108,4 +81,3 @@ const CreateOrphanage = () => {
 };
 
 export default CreateOrphanage;
-// return `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`;

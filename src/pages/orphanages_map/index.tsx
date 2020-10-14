@@ -15,6 +15,11 @@ const OrphanagesMap = () => {
   const handleClick = () => {
     push("/orphanages/create");
   };
+
+  const toOrphanage = () => {
+    push("/orphanages/1");
+  };
+
   const mapIcon = Leaflet.icon({
     iconUrl: markerImg,
     iconSize: [50, 60],
@@ -52,7 +57,7 @@ const OrphanagesMap = () => {
               className="map-popup"
             >
               Lar das meninas
-              <Button icon={<FiArrowRight />} />
+              <Button icon={<FiArrowRight />} onClick={toOrphanage} />
             </Popup>
           </Marker>
         </Map>

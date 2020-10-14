@@ -1,0 +1,44 @@
+@import "../../assets/styles/colors.scss";
+
+.input-block {
+  & + .input-block {
+    margin-top: 2.4rem;
+  }
+
+  label {
+    display: flex;
+    color: $subtitle;
+    margin-bottom: 0.8rem;
+    line-height: 2.4rem;
+
+    span {
+      font-size: 1.4rem;
+      color: $subtitle;
+      margin-left: 2.4rem;
+      line-height: 2.4rem;
+    }
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    background: $grey;
+    border: $border-1;
+    border-radius: 2rem;
+    outline: none;
+    color: $title;
+  }
+
+  input {
+    height: 6.4rem;
+    padding: 0 1.6rem;
+  }
+
+  textarea {
+    min-height: 12rem;
+    max-height: 24rem;
+    resize: vertical;
+    padding: 1.6rem;
+    line-height: 2.8rem;
+  }
+}
