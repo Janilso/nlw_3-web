@@ -1,0 +1,145 @@
+@import "../../assets/styles/colors.scss";
+
+.create-orphanage {
+  display: flex;
+  &::before {
+    content: "";
+    position: relative;
+    width: 10rem;
+  }
+
+  aside {
+    position: fixed;
+    height: 100%;
+    padding: 3.2rem 2.4rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 10rem;
+    img {
+      width: 4.8rem;
+    }
+  }
+
+  main {
+    flex: 1;
+    width: calc(100% - 10rem);
+    .create-orphanage-form {
+      width: 70rem;
+      margin: 6.4rem auto;
+      background: #fff;
+      border: $border-1;
+      border-radius: 2rem;
+      padding: 6.4rem 8rem;
+      overflow: hidden;
+
+      fieldset {
+        border: 0;
+
+        & + fieldset {
+          margin-top: 8rem;
+        }
+
+        .title {
+          width: 100%;
+          font-size: 3.2rem;
+          line-height: 3.4rem;
+          color: $title;
+          font-weight: 700;
+          border-bottom: $border-1;
+          margin-bottom: 4rem;
+          padding-bottom: 2.4rem;
+        }
+
+        .input-block {
+          & + .input-block {
+            margin-top: 2.4rem;
+          }
+
+          label {
+            display: flex;
+            color: $subtitle;
+            margin-bottom: 0.8rem;
+            line-height: 2.4rem;
+
+            span {
+              font-size: 1.4rem;
+              color: $subtitle;
+              margin-left: 2.4rem;
+              line-height: 2.4rem;
+            }
+          }
+
+          input,
+          textarea {
+            width: 100%;
+            background: $grey;
+            border: $border-1;
+            border-radius: 2rem;
+            outline: none;
+            color: $title;
+          }
+
+          input {
+            height: 6.4rem;
+            padding: 0 1.6rem;
+          }
+
+          textarea {
+            min-height: 12rem;
+            max-height: 24rem;
+            resize: vertical;
+            padding: 1.6rem;
+            line-height: 2.8rem;
+          }
+
+          .new-image {
+            width: 100%;
+            height: 6.4rem;
+            background: $grey;
+            border: 1px dashed $border-color-2;
+            border-radius: 2rem;
+            cursor: pointer;
+            outline: none;
+          }
+
+          .button-select {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+
+            button {
+              height: 6.4rem;
+              background: $grey;
+              border: $border-1;
+              color: $title;
+              cursor: pointer;
+
+              &.active {
+                background: $grey;
+                border: 1px solid $active-green;
+                color: $green;
+              }
+
+              &:first-child {
+                border-radius: 2rem 0 0 2rem;
+              }
+              &:last-child {
+                border-radius: 0 2rem 2rem 0;
+                border-left: 0;
+              }
+            }
+          }
+        }
+      }
+
+      button {
+        width: 100%;
+
+        svg {
+          margin-right: 1.6rem;
+        }
+      }
+    }
+  }
+}

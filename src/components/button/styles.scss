@@ -1,13 +1,9 @@
 @import "../../assets/styles/colors.scss";
 
 .button {
-  height: 5.6rem;
-  // background: $secundary;
-  // color: $button-text;
   border: 0;
-  border-radius: 3rem;
+  border-radius: 2.3rem;
   cursor: pointer;
-  // font: 700 1.6rem Archivo;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,14 +11,31 @@
   margin-top: 3.2rem;
   outline: 0 !important;
   position: relative;
-
-  min-width: 8rem;
-  min-height: 8rem;
+  min-width: 6rem;
+  min-height: 6rem;
   transition: all 0.2s;
 
   svg {
-    height: 2.6rem;
-    width: 2.6rem;
+    height: 2rem;
+    width: 2rem;
+  }
+
+  &.button-primary {
+    background-color: $blue-4;
+    color: #fff;
+
+    &:hover {
+      background-color: $blue-2;
+    }
+  }
+
+  &.button-green {
+    background-color: $green-2;
+    color: #fff;
+
+    &:hover {
+      background-color: $green-3;
+    }
   }
 
   &.button-primary-dark {

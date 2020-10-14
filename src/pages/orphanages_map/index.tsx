@@ -11,9 +11,9 @@ import "leaflet/dist/leaflet.css";
 import "./styles.scss";
 
 const OrphanagesMap = () => {
-  const history = useHistory();
+  const { push } = useHistory();
   const handleClick = () => {
-    history.push("/");
+    push("/orphanages/create");
   };
   const mapIcon = Leaflet.icon({
     iconUrl: markerImg,

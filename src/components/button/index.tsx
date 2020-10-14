@@ -2,7 +2,7 @@ import React, { ButtonHTMLAttributes, FormEvent } from "react";
 // import { IconType } from "react-icons";
 import "./styles.scss";
 
-type typesButton = "primary" | "primary-dark" | "secondary";
+type typesButton = "primary" | "primary-dark" | "secondary" | "green";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   typeButton?: typesButton;

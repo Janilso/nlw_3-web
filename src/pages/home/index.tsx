@@ -7,9 +7,9 @@ import { useHistory } from "react-router-dom";
 import Location from "../../components/location";
 
 const Home = () => {
-  const history = useHistory();
+  const { push } = useHistory();
   const handleClick = () => {
-    history.push("/app");
+    push("/app");
   };
 
   return (
