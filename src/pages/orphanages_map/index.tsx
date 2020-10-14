@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FiArrowRight, FiPlus } from "react-icons/fi";
 import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { useHistory } from "react-router-dom";
-import { markerImg } from "../../assets";
 import Leaflet from "leaflet";
+import { markerImg } from "../../assets";
+import { getAllOrphanages } from "../../services/orphanage_service";
+import { iOrphanage } from "../../services/orphanage_service";
 
 import Button from "../../components/button";
 import Location from "../../components/location";
@@ -11,6 +13,10 @@ import "./styles.scss";
 
 const OrphanagesMap = () => {
   const { push } = useHistory();
+  const [orphanages, setOrphanages] = useState<iOrphanage[]>([]);
+  useEffect(() => {
+    getAllOrphanages().then((orphanages) => setOrphanages(orphanages));
+  }, []);
 
   /*
    * Functions
@@ -18,8 +24,8 @@ const OrphanagesMap = () => {
   const handleClick = () => {
     push("/orphanages/create");
   };
-  const toOrphanage = () => {
-    push("/orphanages/1");
+  const toOrphanage = (id: number) => {
+    push(`/orphanages/${id}`);
   };
 
   /*
@@ -44,17 +50,24 @@ const OrphanagesMap = () => {
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
           />
-          <Marker position={[-23.6417191, -46.6600886]} icon={mapIcon}>
-            <Popup
-              closeButton={false}
-              minWidth={240}
-              maxWidth={240}
-              className="map-popup"
-            >
-              Lar das meninas
-              <Button icon={<FiArrowRight />} onClick={toOrphanage} />
-            </Popup>
-          </Marker>
+          {orphanages.map(({ latitude, longitude, id, name }) => {
+            return (
+              <Marker position={[latitude, longitude]} icon={mapIcon} key={id}>
+                <Popup
+                  closeButton={false}
+                  minWidth={240}
+                  maxWidth={240}
+                  className="map-popup"
+                >
+                  {name}
+                  <Button
+                    icon={<FiArrowRight />}
+                    onClick={() => toOrphanage(id)}
+                  />
+                </Popup>
+              </Marker>
+            );
+          })}
         </Map>
       </div>
     );
