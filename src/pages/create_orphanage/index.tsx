@@ -1,21 +1,13 @@
 import React from "react";
 import { Map, Marker, TileLayer } from "react-leaflet";
-import L from "leaflet";
 
 import { FiPlus } from "react-icons/fi";
-import { markerImg } from "../../assets";
 import "./styles.scss";
 import Button from "../../components/button";
 import Sidebar from "../../components/sidebar";
 import Title from "../../components/title";
 import Input from "../../components/input";
-
-const happyMapIcon = L.icon({
-  iconUrl: markerImg,
-  iconSize: [58, 68],
-  iconAnchor: [29, 68],
-  popupAnchor: [0, -60],
-});
+import happyMapIcon from "../../utils/mapIcon";
 
 const CreateOrphanage = () => {
   return (

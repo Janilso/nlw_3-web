@@ -7,7 +7,6 @@ import Leaflet from "leaflet";
 
 import Button from "../../components/button";
 import Location from "../../components/location";
-import "leaflet/dist/leaflet.css";
 import "./styles.scss";
 
 const OrphanagesMap = () => {
