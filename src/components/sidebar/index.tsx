@@ -17,7 +17,7 @@ const Sidebar = () => {
           <Button
             typeButton="primary"
             icon={<FiArrowLeft />}
-            onClick={goBack}
+            onClick={() => goBack()}
           />
         </footer>
       </aside>

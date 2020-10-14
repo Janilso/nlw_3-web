@@ -12,14 +12,20 @@ import "./styles.scss";
 
 const OrphanagesMap = () => {
   const { push } = useHistory();
+
+  /*
+   * Functions
+   */
   const handleClick = () => {
     push("/orphanages/create");
   };
-
   const toOrphanage = () => {
     push("/orphanages/1");
   };
 
+  /*
+   * Renders
+   */
   const mapIcon = Leaflet.icon({
     iconUrl: markerImg,
     iconSize: [50, 60],
@@ -27,18 +33,8 @@ const OrphanagesMap = () => {
     popupAnchor: [165, 10],
   });
 
-  return (
-    <div className="contant orphanages-map">
-      <aside className="bg-gradient">
-        <header>
-          <img src={markerImg} alt="Happy" />
-          <h2>Escolha um orfanato no mapa</h2>
-          <p>{"Muitas crianças estão esperando a sua visita :)"}</p>
-        </header>
-        <footer>
-          <Location />
-        </footer>
-      </aside>
+  const renderMap = () => {
+    return (
       <div className="map">
         <Map
           center={[-23.6431282, -46.660879]}
@@ -62,6 +58,22 @@ const OrphanagesMap = () => {
           </Marker>
         </Map>
       </div>
+    );
+  };
+
+  return (
+    <div className="contant orphanages-map">
+      <aside className="bg-gradient">
+        <header>
+          <img src={markerImg} alt="Happy" />
+          <h2>Escolha um orfanato no mapa</h2>
+          <p>{"Muitas crianças estão esperando a sua visita :)"}</p>
+        </header>
+        <footer>
+          <Location />
+        </footer>
+      </aside>
+      {renderMap()}
       <div className="button-create-orphanage">
         <Button icon={<FiPlus />} onClick={handleClick} />
       </div>
