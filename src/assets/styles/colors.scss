@@ -1,5 +1,7 @@
 $primary: #29b6d1;
-$primary-dark: #15c3d6;
+$primary-dark: #15d6d6;
+// $primary-dark: #15c3d6;
+
 $secondary: #ffd666;
 
 $blue: #00c7c7;
@@ -7,15 +9,20 @@ $blue-2: #17d6eb;
 $blue-3: #0089a5;
 $blue-4: #12afcb;
 $blue-light: #96feff;
+
 $brown: #8d734b;
 $white-opacity: rgba(255, 255, 255, 0.8);
 $border-color: #d3e2e5;
 $border-color-2: #96d2f0;
 $title: #5c8599;
+$title-2: #4d6f80;
+
 $subtitle: #8fa7b3;
-$border-1: 1px solid $border-color;
 $grey: #f5f8fa;
+$grey-2: #e6f7fb;
 $active-green: #a1e9c5;
 $green: #37c77f;
 $green-2: #3cdc8c;
 $green-3: #36cf82;
+
+$border-1: 1px solid $border-color;
