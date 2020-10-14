@@ -1,8 +1,10 @@
 import React from "react";
-import { FiPlus } from "react-icons/fi";
-import { Map, TileLayer } from "react-leaflet";
+import { FiArrowRight, FiPlus } from "react-icons/fi";
+import { Map, TileLayer, Marker, Popup } from "react-leaflet";
 import { useHistory } from "react-router-dom";
 import { markerImg } from "../../assets";
+import Leaflet from "leaflet";
+
 import Button from "../../components/button";
 import Location from "../../components/location";
 import "leaflet/dist/leaflet.css";
@@ -13,13 +15,20 @@ const OrphanagesMap = () => {
   const handleClick = () => {
     history.push("/");
   };
+  const mapIcon = Leaflet.icon({
+    iconUrl: markerImg,
+    iconSize: [50, 60],
+    iconAnchor: [25, 60],
+    popupAnchor: [165, 10],
+  });
+
   return (
     <div className="contant orphanages-map">
       <aside className="bg-gradient">
         <header>
           <img src={markerImg} alt="Happy" />
           <h2>Escolha um orfanato no mapa</h2>
-          <p>Muitas crianças estão esperando a sua visita :)</p>
+          <p>{"Muitas crianças estão esperando a sua visita :)"}</p>
         </header>
         <footer>
           <Location />
@@ -35,6 +44,17 @@ const OrphanagesMap = () => {
           <TileLayer
             url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
           />
+          <Marker position={[-23.6417191, -46.6600886]} icon={mapIcon}>
+            <Popup
+              closeButton={false}
+              minWidth={240}
+              maxWidth={240}
+              className="map-popup"
+            >
+              Lar das meninas
+              <Button icon={<FiArrowRight />} />
+            </Popup>
+          </Marker>
         </Map>
       </div>
       <div className="button-create-orphanage">
