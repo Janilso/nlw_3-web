@@ -10,6 +10,7 @@ import { iOrphanage } from "../../services/orphanage_service";
 import Button from "../../components/button";
 import Location from "../../components/location";
 import "./styles.scss";
+import { URL_MAPBOX } from "../../services/api_routers";
 
 const OrphanagesMap = () => {
   const { push } = useHistory();
@@ -47,9 +48,7 @@ const OrphanagesMap = () => {
           style={{ width: "100%", height: "100vh" }}
         >
           {/* <TileLayer url="https://a.tile.openstreetmap.org/{z}/{x}/{y}.png" /> */}
-          <TileLayer
-            url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
-          />
+          <TileLayer url={URL_MAPBOX} />
           {orphanages.map(({ latitude, longitude, id, name }) => {
             return (
               <Marker position={[latitude, longitude]} icon={mapIcon} key={id}>
