@@ -6,6 +6,7 @@ import L from "leaflet";
 import { markerImg } from "../../assets";
 import "./styles.scss";
 import Sidebar from "../../components/sidebar";
+import CarroselImages from "../../components/carousel_images";
 
 const happyMapIcon = L.icon({
   iconUrl: markerImg,
@@ -16,54 +17,69 @@ const happyMapIcon = L.icon({
 
 const Orphanage = () => {
   return (
-    <div id="page-orphanage" className="orphanage">
+    <div className="orphanage">
       <Sidebar />
 
       <main>
         <div className="orphanage-details">
-          <img
-            src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-            alt="Lar das meninas"
+          <CarroselImages
+            images={[
+              {
+                url:
+                  "https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg",
+                alt: "Lar das meninas",
+                id: 0,
+              },
+              {
+                url:
+                  "https://www.lupadigital.info/wp-content/uploads/2018/05/imagens-gratis.jpg",
+                alt: "Lar das meninas",
+                id: 1,
+              },
+              {
+                url:
+                  "https://i.pinimg.com/originals/e4/34/2a/e4342a4e0e968344b75cf50cf1936c09.jpg",
+                alt: "Lar das meninas",
+                id: 2,
+              },
+              {
+                url:
+                  "https://i.pinimg.com/originals/07/12/9a/07129ae291762b21e20b42552803704b.jpg",
+                alt: "Lar das meninas",
+                id: 3,
+              },
+              {
+                url:
+                  "https://www.sonetur.com.br/wp-content/uploads/2018/03/sonetur-fotos-2017-63.jpg",
+                alt: "Lar das meninas",
+                id: 4,
+              },
+              {
+                url:
+                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
+                alt: "Lar das meninas",
+                id: 5,
+              },
+              {
+                url:
+                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
+                alt: "Lar das meninas",
+                id: 6,
+              },
+              {
+                url:
+                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
+                alt: "Lar das meninas",
+                id: 7,
+              },
+              {
+                url:
+                  "https://diariodorio.com/wp-content/uploads/2020/07/Pedra_da_gavea_capa.jpg",
+                alt: "Lar das meninas",
+                id: 8,
+              },
+            ]}
           />
-
-          <div className="images">
-            <button className="active" type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-            <button type="button">
-              <img
-                src="https://www.gcd.com.br/wp-content/uploads/2020/08/safe_image.jpg"
-                alt="Lar das meninas"
-              />
-            </button>
-          </div>
 
           <div className="orphanage-details-content">
             <h1>Lar das meninas</h1>
